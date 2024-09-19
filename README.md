@@ -1,2 +1,3 @@
-# yrruf-llik
+# YRRUFLLIK
+## Мой игровой проект сделанный ради прикола и не больше
  just rofl game
