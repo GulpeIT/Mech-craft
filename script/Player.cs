@@ -3,31 +3,45 @@ using Godot;
 public partial class Player : CharacterBody2D
 {
 	[ExportCategory("Player movement")]
-	[Export] public float CharacterMaxSpeed = 150f; 
-	[Export] public float CharacterAcceleration = 20f;
+	[Export] public float MaxSpeed = 80f; 
+	[Export] public float Acceleration = 2.5f;
+	[Export] public float SpeedStopMotion = 25f;
+	[Export] public float RotationSpeed = 0.15f;
 
-    //TODO: Сделать прикол типа игрок такой уууу буду гнать,
-    // а потом ему надо тормозить,
-    // а трение такое ооооо не дам и он медленно тормозит и меняет угол поворота
-
-    //TODO: Сделать прикол, типа перс медленно разворачивается и типа на это влияет что-то
-    // там типа какие-то ебучие множители и так далее я ваще хз че делаю xdd секс фури насилие.
-
+	public Vector2 Motion = Vector2.Zero;
+	public Vector2 Direction = Vector2.Zero;
+	
     public override void _PhysicsProcess(double delta)
 	{
-		Velocity = CharacterMaxSpeed * GetDirection();
+		Direction = Input.GetVector("uc_left", "uc_right", "uc_up", "uc_down");
 
-		// LookAt(GetGlobalMousePosition());
-
-		GD.Print(Velocity);
-		MoveAndSlide();	
+		if(Direction != Vector2.Zero)
+		{
+			AccelerationCharacter();
+			RotateCharacter(); 
+		}
+		else
+		{
+			DecelerationCharacter();
+		}
+	
+		MoveAndCollide(Motion * (float)delta, false, 0.08f, false);
 	}
 
-	private Vector2 GetDirection()
+	public void AccelerationCharacter()
 	{
-		Vector2 dir = new Vector2(0, 0);
-		dir.X = Input.GetAxis("uc_left", "uc_right");
-		dir.Y = Input.GetAxis("uc_up", "uc_down"); 
-		return dir.Normalized();
+		Motion.X = Mathf.MoveToward(Motion.X, MaxSpeed * Direction.X, SpeedStopMotion);
+		Motion.Y = Mathf.MoveToward(Motion.Y, MaxSpeed * Direction.Y, SpeedStopMotion);
+	}
+
+	public void DecelerationCharacter()
+	{
+		Motion.X = Mathf.MoveToward(Motion.X, 0, SpeedStopMotion);
+		Motion.Y = Mathf.MoveToward(Motion.Y, 0, SpeedStopMotion);
+	}
+
+	public void RotateCharacter()
+	{
+		Rotation = Mathf.RotateToward(Rotation, Motion.Angle(), RotationSpeed);
 	}
 }
