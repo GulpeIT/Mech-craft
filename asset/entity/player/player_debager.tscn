@@ -1,3 +1,22 @@
-[gd_scene format=3 uid="uid://bgdm4yuypqwtp"]
+[gd_scene load_steps=2 format=3 uid="uid://bgdm4yuypqwtp"]
+
+[ext_resource type="Script" path="res://asset/entity/player/PlayerDebager.cs" id="1_4uyox"]
 
 [node name="PlayerDebager" type="Node2D"]
+script = ExtResource("1_4uyox")
+
+[node name="LabelHealthPoint" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -50.0
+offset_right = 77.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Player hp not found"
+horizontal_alignment = 1

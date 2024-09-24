@@ -13,7 +13,8 @@ config_version=5
 config/name="Yrruf llik"
 run/main_scene="res://asset/scene/main_scene.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://asset/icon/icon.png"
+config/windows_native_icon="res://asset/icon/icon_64x64.ico"
 
 [display]
 
