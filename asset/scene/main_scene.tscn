@@ -21,7 +21,4 @@ zoom = Vector2(0.5, 0.5)
 [node name="Player" parent="." instance=ExtResource("2_d0jv8")]
 position = Vector2(151, 51)
 
-[node name="HealthComponent" parent="Player" index="0"]
-Health = 0.0
-
 [editable path="Player"]

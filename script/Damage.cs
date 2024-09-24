@@ -1,9 +1,12 @@
 using Godot;
 
-public class Damage
+namespace script
 {
-    public float DealDamage {get; set;}
-    public float ArmorPenetration {get; set;}
+    public class Damage
+    {
+        public float _DealDamage {get; set;}
+        public float _ArmorPenetration {get; set;}
 
-    public float GetDamage() => DealDamage + ArmorPenetration;
+        public float GetDamage() => _DealDamage + _ArmorPenetration;
+    }
 }

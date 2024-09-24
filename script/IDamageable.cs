@@ -4,7 +4,7 @@ namespace script
 {
     public interface IDamageable
     {
-        Damage damage { get; set; }
+        public Damage _Damage { get; set; }
 
         public float GetDamage();
     }

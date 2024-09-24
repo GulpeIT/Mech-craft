@@ -1,16 +1,21 @@
+using script;
 using Godot;
 
-public partial class HealthComponent : Node2D
-{
-    [Export]
-    public float MaxHealth { get; set; }
-    [Export]
-    public float CurrentHealth { get; set; }
-    [Export]
-    public float Armor { get; set; }
-
-    public void RemoveHealth(Damage damage)
+namespace components
+{    
+    public partial class HealthComponent : Node2D
     {
-        CurrentHealth = CurrentHealth - damage.GetDamage();
+        [Export]
+        public float _MaxHealth { get; set; }
+        [Export]
+        public float _CurrentHealth { get; set; }
+        [Export]
+        public float _Armor { get; set; }
+
+        public void RemoveHealth(Damage damage)
+        {
+            _CurrentHealth = _CurrentHealth - damage.GetDamage();
+        }
     }
 }
+

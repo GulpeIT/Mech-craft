@@ -1,4 +1,5 @@
 using Godot;
+using components;
 
 public partial class PlayerDebager : Node2D
 {
@@ -12,16 +13,16 @@ public partial class PlayerDebager : Node2D
 
 	public override void _Draw()
 	{
-		DrawCircle(Player.Motion, 10f, Color.Color8(255, 255, 255, 255), false, 1f, false);
-		DrawLine(Vector2.Zero, Player.Motion, Color.Color8(255, 255, 255, 255), 1, false);
+		DrawCircle(Player._Motion, 10f, Color.Color8(255, 255, 255, 255), false, 1f, false);
+		DrawLine(Vector2.Zero, Player._Motion, Color.Color8(255, 255, 255, 255), 1, false);
 
-		DrawCircle(Vector2.FromAngle(Player.Rotation) * Player.MaxSpeed, 5f, Color.Color8(0, 255, 0, 255), false, 1f, false);
+		DrawCircle(Vector2.FromAngle(Player.Rotation) * Player._MaxSpeed, 5f, Color.Color8(0, 255, 0, 255), false, 1f, false);
 	}
 	
 	public override void _Ready()
 	{
 		HealthLabel = GetNode<Label>("LabelHealthPoint");
-		HealthLabel.Text = $"now HP = {HealthComponent.Health}" ;
+		HealthLabel.Text = $"now HP = {HealthComponent._CurrentHealth}" ;
 	}
 
 	public override void _Process(double delta)

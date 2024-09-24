@@ -4,32 +4,33 @@ public partial class Player : CharacterBody2D
 {
 	[ExportCategory("Player movement")]
 	[Export] 
-	public float MaxSpeed = 80f; 
+	public float _MaxSpeed = 80f; 
 	[Export] 
-	public float Acceleration = 2.5f;
+	public float _Acceleration = 2.5f;
 	[Export] 
-	public float SpeedStopMotion = 25f;
+	public float _SpeedStopMotion = 25f;
 	[Export(PropertyHint.Range, "0, 3.5, 0.2")] 
-	public float RotationSpeed = 0.15f;
+	public float _RotationSpeed = 0.15f;
 
-	public Vector2 Motion = Vector2.Zero;
-	public Vector2 Direction = Vector2.Zero;
+	public Vector2 _Motion = Vector2.Zero;
+	public Vector2 _Direction = Vector2.Zero;
 	
     public override void _PhysicsProcess(double delta)
 	{
-		Direction = Input.GetVector("uc_left", "uc_right", "uc_up", "uc_down");
+		_Direction = Input.GetVector("uc_left", "uc_right", "uc_up", "uc_down");
 
-		if(Direction != Vector2.Zero)
+		RotateCharacterToPoint(GetLocalMousePosition().Angle());
+
+		if(_Direction != Vector2.Zero)
 		{
 			AccelerationCharacter();
-			RotateCharacter();
 		}
 		else
 		{
 			DecelerationCharacter();
 		}
 	
-		MoveAndCollide(Motion * (float)delta, false, 0.08f, true);
+		MoveAndCollide(_Motion * (float)delta, false, 0.08f, true);
 	}
 
 	//ToDo:  при использование мышки или геймпада, персонаж наблюдает за точкой. Если игрок не пользуется мышкой или геймпадом
@@ -39,17 +40,20 @@ public partial class Player : CharacterBody2D
 	//1)
 	private void AccelerationCharacter()
 	{
-		Motion.X = Mathf.MoveToward(Motion.X, MaxSpeed * Direction.X, SpeedStopMotion);
-		Motion.Y = Mathf.MoveToward(Motion.Y, MaxSpeed * Direction.Y, SpeedStopMotion);
+		_Motion.X = Mathf.MoveToward(_Motion.X, _MaxSpeed * _Direction.X, _Acceleration);
+		_Motion.Y = Mathf.MoveToward(_Motion.Y, _MaxSpeed * _Direction.Y, _Acceleration);
 	}
 	//2)
 	private void DecelerationCharacter()
 	{
-		Motion.X = Mathf.MoveToward(Motion.X, 0, SpeedStopMotion);
-		Motion.Y = Mathf.MoveToward(Motion.Y, 0, SpeedStopMotion);
+		_Motion.X = Mathf.MoveToward(_Motion.X, 0, _SpeedStopMotion);
+		_Motion.Y = Mathf.MoveToward(_Motion.Y, 0, _SpeedStopMotion);
 	}
 	//3)
 	//Use lerp add smooth rotation
-	private void RotateCharacter() => Rotation = Mathf.LerpAngle(Rotation, Motion.Angle(), RotationSpeed); 
-	
+	private void RotateCharacterToPoint(float AngelInRadians) => Rotation = Mathf.LerpAngle(Rotation, AngelInRadians, _RotationSpeed); 
+	private void RotateCharacterToPoint(Vector2 CoordOfPoint)
+	{
+		
+	}
 }
