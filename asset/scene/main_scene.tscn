@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://q6d1yd82jd2o"]
 
-[ext_resource type="Script" path="res://script/MainScene.cs" id="1_hl20o"]
+[ext_resource type="Script" path="res://script/game_object/MainScene.cs" id="1_hl20o"]
 [ext_resource type="PackedScene" uid="uid://bgdm4yuypqwtp" path="res://asset/entity/player/player_debager.tscn" id="2_0cauj"]
 [ext_resource type="PackedScene" uid="uid://biglifoj7nsqr" path="res://asset/entity/player/player.tscn" id="2_d0jv8"]
 
@@ -8,10 +8,9 @@
 script = ExtResource("1_hl20o")
 metadata/_edit_vertical_guides_ = [-974.0, -1084.0]
 
-[node name="PlayerDebager" parent="." node_paths=PackedStringArray("Player", "HealthComponent") instance=ExtResource("2_0cauj")]
+[node name="PlayerDebager" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("2_0cauj")]
 position = Vector2(151, 51)
 Player = NodePath("../Player")
-HealthComponent = NodePath("../Player/HealthComponent")
 
 [node name="ActionCamera" type="Camera2D" parent="."]
 position = Vector2(151, 51)

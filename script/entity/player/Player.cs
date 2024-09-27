@@ -14,22 +14,21 @@ public partial class Player : CharacterBody2D
 
 	public Vector2 _Motion = Vector2.Zero;
 	public Vector2 _Direction = Vector2.Zero;
-	
+
     public override void _PhysicsProcess(double delta)
 	{
 		_Direction = Input.GetVector("uc_left", "uc_right", "uc_up", "uc_down");
 
-		RotateCharacterToPoint(GetLocalMousePosition().Angle());
-
 		if(_Direction != Vector2.Zero)
 		{
 			AccelerationCharacter();
+			RotateCharacterToPoint(_Direction.Angle());
 		}
 		else
 		{
 			DecelerationCharacter();
 		}
-	
+
 		MoveAndCollide(_Motion * (float)delta, false, 0.08f, true);
 	}
 
@@ -51,9 +50,5 @@ public partial class Player : CharacterBody2D
 	}
 	//3)
 	//Use lerp add smooth rotation
-	private void RotateCharacterToPoint(float AngelInRadians) => Rotation = Mathf.LerpAngle(Rotation, AngelInRadians, _RotationSpeed); 
-	private void RotateCharacterToPoint(Vector2 CoordOfPoint)
-	{
-		
-	}
+	private void RotateCharacterToPoint(float AngelInRadians) => Rotation = Mathf.LerpAngle(Rotation, AngelInRadians, _RotationSpeed);
 }
