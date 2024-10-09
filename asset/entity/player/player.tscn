@@ -1,80 +1,45 @@
-[gd_scene load_steps=9 format=3 uid="uid://biglifoj7nsqr"]
+[gd_scene load_steps=8 format=3 uid="uid://biglifoj7nsqr"]
 
-[ext_resource type="Texture2D" uid="uid://dypx2ru0fqivr" path="res://asset/sprite/body.png" id="1_1to0t"]
 [ext_resource type="Script" path="res://script/entity/player/Player.cs" id="1_t60oh"]
-[ext_resource type="PackedScene" uid="uid://c0u8ycmrvpn4" path="res://asset/components/health_component/health_component.tscn" id="2_04xc8"]
+[ext_resource type="Texture2D" uid="uid://03syqvcdpm3h" path="res://asset/sprite/character.png" id="2_axdnj"]
+[ext_resource type="Script" path="res://script/component/HealthComponent.cs" id="3_rfg7t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h3bvr"]
-radius = 9.0
-height = 28.0
+radius = 5.0
+height = 16.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ui873"]
-atlas = ExtResource("1_1to0t")
-region = Rect2(7, 39, 16, 34)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jvoh"]
+atlas = ExtResource("2_axdnj")
+region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_okq40"]
-atlas = ExtResource("1_1to0t")
-region = Rect2(8, 89, 15, 14)
+[sub_resource type="AtlasTexture" id="AtlasTexture_760cc"]
+atlas = ExtResource("2_axdnj")
+region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0vnjs"]
-atlas = ExtResource("1_1to0t")
-region = Rect2(7, 8, 18, 15)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fdof6"]
-atlas = ExtResource("1_1to0t")
-region = Rect2(38, 11, 22, 11)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjquc"]
+atlas = ExtResource("2_axdnj")
+region = Rect2(0, 160, 32, 32)
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 0.349066
 script = ExtResource("1_t60oh")
 _Acceleration = 20.5
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_04xc8")]
-
 [node name="Collsionbody" type="CollisionShape2D" parent="."]
-z_index = -3
-rotation = -3.14159
+rotation = -4.71238
 shape = SubResource("CapsuleShape2D_h3bvr")
 
-[node name="SpriteBody" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_ui873")
-centered = false
-offset = Vector2(-8, -17)
+[node name="Wheelbase" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_0jvoh")
 
-[node name="SpriteHead" type="Sprite2D" parent="SpriteBody"]
-position = Vector2(1, 0)
-texture = SubResource("AtlasTexture_okq40")
-centered = false
-offset = Vector2(-7, -7)
+[node name="Base" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_760cc")
 
-[node name="WeaponPosition" type="Marker2D" parent="SpriteBody"]
-show_behind_parent = true
+[node name="Head" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_fjquc")
 
-[node name="SpriteShoulder_R" type="Sprite2D" parent="SpriteBody/WeaponPosition"]
-show_behind_parent = true
-position = Vector2(1, -14)
-scale = Vector2(1, -1)
-texture = SubResource("AtlasTexture_0vnjs")
-centered = false
-offset = Vector2(-5, -5)
-
-[node name="SpriteArm_R" type="Sprite2D" parent="SpriteBody/WeaponPosition/SpriteShoulder_R"]
-show_behind_parent = true
-position = Vector2(11, 6)
-texture = SubResource("AtlasTexture_fdof6")
-centered = false
-offset = Vector2(-4, -7)
-
-[node name="SpriteShoulder_L" type="Sprite2D" parent="SpriteBody/WeaponPosition"]
-show_behind_parent = true
-position = Vector2(2, 13)
-texture = SubResource("AtlasTexture_0vnjs")
-centered = false
-offset = Vector2(-5, -4)
-
-[node name="SpriteArm_L" type="Sprite2D" parent="SpriteBody/WeaponPosition/SpriteShoulder_L"]
-show_behind_parent = true
-position = Vector2(11, 7)
-rotation = -0.00161323
-texture = SubResource("AtlasTexture_fdof6")
-centered = false
-offset = Vector2(-4, -7)
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("3_rfg7t")
+_MaxHealth = 3.0
+_CurrentHealth = 3.0

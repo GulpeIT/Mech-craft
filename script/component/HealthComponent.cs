@@ -1,8 +1,9 @@
 using script;
 using Godot;
 
-namespace components
-{    
+namespace component
+{
+    [GlobalClass]
     public partial class HealthComponent : Node2D
     {
         [Export]
@@ -12,9 +13,18 @@ namespace components
         [Export]
         public float _Armor { get; set; }
 
-        public void RemoveHealth(Damage damage)
+        public override void _Ready()
         {
-            _CurrentHealth = _CurrentHealth - damage.GetDamage();
+            
+        }
+
+        public void AddHealth(float HP)
+        {
+            _CurrentHealth += HP;
+            if (_CurrentHealth > _MaxHealth)
+            {
+                _CurrentHealth = _MaxHealth;
+            }
         }
     }
 }
