@@ -20,14 +20,13 @@ config/windows_native_icon="res://asset/icon/icon.ico"
 
 window/size/viewport_width=384
 window/size/viewport_height=216
-window/size/mode=4
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="Yrruf llik"
+project/assembly_name="Mech Craft"
 
 [input]
 
